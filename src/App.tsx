@@ -2,7 +2,7 @@ import Header from "./components/Header"
 import HabitForm from "./components/HabitForm"
 import HabitList from "./components/HabitList"
 import { HabitProvider } from "./context/HabitProvider"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { addWeeks, eachDayOfInterval, endOfWeek, startOfWeek } from "date-fns"
 
 export default function App() {
@@ -15,6 +15,20 @@ export default function App() {
     start: startOfWeek(week, { weekStartsOn: 1 }),
     end: endOfWeek(week, { weekStartsOn: 1 })
   })
+
+
+  // useEffect note: the function on the return statement cleans up the event listener,
+  // so I don't have multiple event listeners created, one for every rerun of the useEffect hook.
+  // useEffect reruns everytime a value in the dependency array changes 
+  useEffect(() => {
+    function handler() {
+      console.log(weekOffset)
+    }
+    document.addEventListener("click", handler)
+    return () => {
+      document.removeEventListener("click", handler)
+    }
+  }, [weekOffset])
 
   return <div className="max-w-2x1 mx-auto p-4 flex flex-col gap-4">
 
