@@ -1,5 +1,5 @@
 import Button from "./Button"
-import { eachDayOfInterval, endOfWeek, startOfWeek, format, isFuture, isSameDay, subDays } from "date-fns"
+import { format, isFuture, isSameDay, subDays } from "date-fns"
 import { useHabits, type Habit } from "../context/useHabits";
 
 type HabitListProps = {
